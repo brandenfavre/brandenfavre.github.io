@@ -55,11 +55,12 @@ permalink: "/360"
 
 
 
-    controls = new TrackballControls( camera, renderer.domElement );
-
-
-    animate();
-
+    // Wait for TrackballControls.js to be fully loaded and executed
+    var trackballControlsScript = document.querySelector('script[src="https://threejs.org/examples/jsm/controls/TrackballControls.js"]');
+    trackballControlsScript.onload = function() {
+      controls = new TrackballControls(camera, renderer.domElement);
+      animate();
+    };
 
   };
 
