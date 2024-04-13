@@ -12,56 +12,51 @@ permalink: "/360"
 <script>
 
   var scene, camera, renderer, ambientLight, light, controls;
-
-  window.onload = function() {
-
-    container = document.getElementById('content');
-    container.style.margin = '20px';
-
-    scene = new THREE.Scene();
-
-    camera = new THREE.PerspectiveCamera(60, (container.clientWidth) / (container.clientHeight), 1, 10000);
-    camera.position.set( 0, 0, 500);
-
-    renderer = new THREE.WebGLRenderer({ });
-    renderer.setSize( container.clientWidth, container.clientHeight );
-    container.appendChild( renderer.domElement );
-    
-    ambientLight = new THREE.AmbientLight(0x000000);
-    scene.add( ambientLight );
-
-    directionalLight = new THREE.DirectionalLight( 0xffffff, 5.0 );
-    directionalLight.position.set( 10, 100, 10 );
-    scene.add( directionalLight );
-
-
-
-    var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
-
-
-    which = 'weblab.jpg';
-    if (location.search != '') {
-        which = location.search.substr(1);
-    }
-
-    var texture = new THREE.TextureLoader().load( 'WEB/images/360/'+which );
-
-
-    var material = new THREE.MeshBasicMaterial({  map:texture, side: THREE.BackSide });
-
-    sphere = new THREE.Mesh( geometry, material );
-
-    scene.add(sphere);
-
-
-
-    // Wait for TrackballControls.js to be fully loaded and executed
-    var trackballControlsScript = document.querySelector('script[src="https://threejs.org/examples/jsm/controls/TrackballControls.js"]');
-    trackballControlsScript.onload = function() {
-      controls = new TrackballControls(camera, renderer.domElement);
-      animate();
-    };
-
+  var trackballControlsScript = document.querySelector('script[src="https://threejs.org/examples/jsm/controls/TrackballControls.js"]');
+  trackballControlsScript.onload = function() {
+    window.onload = function() {
+  
+      container = document.getElementById('content');
+      container.style.margin = '20px';
+  
+      scene = new THREE.Scene();
+  
+      camera = new THREE.PerspectiveCamera(60, (container.clientWidth) / (container.clientHeight), 1, 10000);
+      camera.position.set( 0, 0, 500);
+  
+      renderer = new THREE.WebGLRenderer({ });
+      renderer.setSize( container.clientWidth, container.clientHeight );
+      container.appendChild( renderer.domElement );
+      
+      ambientLight = new THREE.AmbientLight(0x000000);
+      scene.add( ambientLight );
+  
+      directionalLight = new THREE.DirectionalLight( 0xffffff, 5.0 );
+      directionalLight.position.set( 10, 100, 10 );
+      scene.add( directionalLight );
+  
+  
+  
+      var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+  
+  
+      which = 'weblab.jpg';
+      if (location.search != '') {
+          which = location.search.substr(1);
+      }
+  
+      var texture = new THREE.TextureLoader().load( 'WEB/images/360/'+which );
+  
+  
+      var material = new THREE.MeshBasicMaterial({  map:texture, side: THREE.BackSide });
+  
+      sphere = new THREE.Mesh( geometry, material );
+  
+      scene.add(sphere);
+  
+        controls = new TrackballControls(camera, renderer.domElement);
+        animate();
+      }
   };
 
   function animate() {
