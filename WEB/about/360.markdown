@@ -12,8 +12,6 @@ permalink: "/360"
 <script>
 
   var scene, camera, renderer, ambientLight, light, controls;
-  var trackballControlsScript = document.querySelector('script[src="https://threejs.org/examples/jsm/controls/TrackballControls.js"]');
-  trackballControlsScript.onload = function() {
     window.onload = function() {
   
       container = document.getElementById('content');
@@ -53,7 +51,8 @@ permalink: "/360"
       sphere = new THREE.Mesh( geometry, material );
   
       scene.add(sphere);
-  
+      var trackballControlsScript = document.querySelector('script[src="https://threejs.org/examples/jsm/controls/TrackballControls.js"]');
+      trackballControlsScript.onload = function() {
         controls = new TrackballControls(camera, renderer.domElement);
         animate();
       }
